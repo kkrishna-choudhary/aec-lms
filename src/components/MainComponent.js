@@ -9,9 +9,10 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers, loginUser, logoutUser, fetchFavorites, postFavorite, deleteFavorite } from '../redux/ActionCreators';
+import { postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers,signupUser, loginUser,logoutUser, fetchFavorites, postFavorite, deleteFavorite, receiveLogin } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 
 const mapStateToProps = state => {
     return {
@@ -21,7 +22,8 @@ const mapStateToProps = state => {
       developers: state.developers,
       favorites: state.favorites,
       courseItems: state.courseItems,
-      auth: state.auth
+      auth: state.auth,
+      signupStatus: state.signupStatus
     }
 }
 
@@ -30,12 +32,15 @@ const mapDispatchToProps = (dispatch) => ({
   postComment: (courseId, rating, comment) => dispatch(postComment(courseId, rating, comment)),
   fetchCourses: () => {dispatch(fetchCourses())},
   resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
+  resetSignupForm: () => { dispatch(actions.reset('signup'))},
+  resetLoginForm: () => { dispatch(actions.reset('login'))},
   fetchComments: () => {dispatch(fetchComments())},
   fetchPromos: () => {dispatch(fetchPromos())},
   fetchDevelopers: () => dispatch(fetchDevelopers()),
   fetchCourseItems: () => { dispatch(fetchCourseItems()) },
   postFeedback: (feedback) => dispatch(postFeedback(feedback)),
   loginUser: (creds) => dispatch(loginUser(creds)),
+  signupUser: (creds) => dispatch(signupUser(creds)),
   logoutUser: () => dispatch(logoutUser()),
   fetchFavorites: () => dispatch(fetchFavorites()),
   postFavorite: (courseId) => dispatch(postFavorite(courseId)),
@@ -51,6 +56,10 @@ class Main extends Component {
     this.props.fetchDevelopers();
     this.props.fetchFavorites();
     this.props.fetchCourseItems();
+  }
+
+  componentDidUpdate() {
+    window.scrollTo(0, 0);
   }
 
   render() {
@@ -116,8 +125,12 @@ class Main extends Component {
     return (
       <div>
         <Header auth={this.props.auth} 
+          signupUser={this.props.signupUser} 
           loginUser={this.props.loginUser} 
           logoutUser={this.props.logoutUser} 
+          resetLoginForm={this.props.resetLoginForm}
+          resetSignupForm={this.props.resetSignupForm}
+          signupStatus={this.props.signupStatus}
           />   
         <TransitionGroup>
           <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>

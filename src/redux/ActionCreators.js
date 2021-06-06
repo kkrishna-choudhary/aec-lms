@@ -26,24 +26,26 @@ export const postComment = (courseId, rating, comment) => (dispatch) => {
         },
         credentials: 'same-origin'
     })
-    .then(response => {
-        if (response.ok) {
-            return response;
-        }
-        else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-        }
-    },
-    error => {
-        var errmess = new Error(error.message);
-        throw errmess;
-    })
-    .then(response => response.json())
-    .then(response => dispatch(addComment(response)))
-    .catch(error => { console.log('Post comments ', error.message);
-        alert('Your comment could not be posted\nError: '+ error.message); })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(response => dispatch(addComment(response)))
+        .catch(error => {
+            console.log('Post comments ', error.message);
+            alert('Your comment could not be posted\nError: ' + error.message);
+        })
 }
 
 export const fetchCourses = () => (dispatch) => {
@@ -60,10 +62,10 @@ export const fetchCourses = () => (dispatch) => {
                 throw error;
             }
         },
-        error => {
-            var errmess = new Error(error.message);
-            throw errmess;
-        })
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
         .then(response => response.json())
         .then(courses => dispatch(addCourses(courses)))
         .catch(error => dispatch(coursesFailed(error.message)));
@@ -95,10 +97,10 @@ export const fetchComments = () => (dispatch) => {
                 throw error;
             }
         },
-        error => {
-            var errmess = new Error(error.message);
-            throw errmess;
-        })
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
         .then(response => response.json())
         .then(comments => dispatch(addComments(comments)))
         .catch(error => dispatch(commentsFailed(error.message)));
@@ -128,10 +130,10 @@ export const fetchPromos = () => (dispatch) => {
                 throw error;
             }
         },
-        error => {
-            var errmess = new Error(error.message);
-            throw errmess;
-        })
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
         .then(response => response.json())
         .then(promos => dispatch(addPromos(promos)))
         .catch(error => dispatch(promosFailed(error.message)));
@@ -152,26 +154,26 @@ export const addPromos = (promos) => ({
 });
 
 export const fetchDevelopers = () => (dispatch) => {
-    
+
     dispatch(developersLoading());
 
     return fetch(baseUrl + 'developers')
-    .then(response => {
-        if (response.ok) {
-            return response;
-        } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-        }
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
         },
-        error => {
-            var errmess = new Error(error.message);
-            throw errmess;
-        })
-    .then(response => response.json())
-    .then(developers => dispatch(addDevelopers(developers)))
-    .catch(error => dispatch(developersFailed(error.message)));
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(developers => dispatch(addDevelopers(developers)))
+        .catch(error => dispatch(developersFailed(error.message)));
 }
 
 export const developersLoading = () => ({
@@ -189,30 +191,30 @@ export const addDevelopers = (developers) => ({
 });
 
 export const postFeedback = (feedback) => (dispatch) => {
-        
+
     return fetch(baseUrl + 'feedback', {
         method: "POST",
         body: JSON.stringify(feedback),
         headers: {
-          "Content-Type": "application/json"
+            "Content-Type": "application/json"
         },
         credentials: "same-origin"
     })
-    .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          var error = new Error('Error ' + response.status + ': ' + response.statusText);
-          error.response = response;
-          throw error;
-        }
-      },
-      error => {
-            throw error;
-      })
-    .then(response => response.json())
-    .then(response => { console.log('Feedback', response); alert('Thank you for your feedback!\n'+JSON.stringify(response)); })
-    .catch(error =>  { console.log('Feedback', error.message); alert('Your feedback could not be posted\nError: '+error.message); });
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(response => { console.log('Feedback', response); alert('Thank you for your feedback!\n' + JSON.stringify(response)); })
+        .catch(error => { console.log('Feedback', error.message); alert('Your feedback could not be posted\nError: ' + error.message); });
 };
 
 export const requestLogin = (creds) => {
@@ -221,14 +223,14 @@ export const requestLogin = (creds) => {
         creds
     }
 }
-  
+
 export const receiveLogin = (response) => {
     return {
         type: ActionTypes.LOGIN_SUCCESS,
         token: response.token
     }
 }
-  
+
 export const loginError = (message) => {
     return {
         type: ActionTypes.LOGIN_FAILURE,
@@ -242,51 +244,55 @@ export const loginUser = (creds) => (dispatch) => {
 
     return fetch(baseUrl + 'users/login', {
         method: 'POST',
-        headers: { 
-            'Content-Type':'application/json' 
+        headers: {
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(creds)
     })
-    .then(response => {
-        if (response.ok) {
-            return response;
-        } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-        }
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
         },
-        error => {
-            throw error;
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(response => {
+            if (response.success) {
+                // If login was successful, set the token in local storage
+                localStorage.setItem('token', response.token);
+                localStorage.setItem('creds', JSON.stringify(creds));
+                
+                // Dispatch the success action
+                dispatch(fetchFavorites());
+                dispatch(receiveLogin(response));
+            }
+            else {
+                var error = new Error('Error ' + response.status);
+                error.response = response;
+                throw error;
+            }
         })
-    .then(response => response.json())
-    .then(response => {
-        if (response.success) {
-            // If login was successful, set the token in local storage
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('creds', JSON.stringify(creds));
-            // Dispatch the success action
-            dispatch(fetchFavorites());
-            dispatch(receiveLogin(response));
-        }
-        else {
-            var error = new Error('Error ' + response.status);
-            error.response = response;
-            throw error;
-        }
-    })
-    .catch(error => dispatch(loginError(error.message)))
+        .catch(error => dispatch(loginError(error.message)))
 };
+
+
+
 
 export const requestLogout = () => {
     return {
-      type: ActionTypes.LOGOUT_REQUEST
+        type: ActionTypes.LOGOUT_REQUEST
     }
 }
-  
+
 export const receiveLogout = () => {
     return {
-      type: ActionTypes.LOGOUT_SUCCESS
+        type: ActionTypes.LOGOUT_SUCCESS
     }
 }
 
@@ -305,28 +311,28 @@ export const postFavorite = (courseId) => (dispatch) => {
 
     return fetch(baseUrl + 'enrolledCourses/' + courseId, {
         method: "POST",
-        body: JSON.stringify({"_id": courseId}),
+        body: JSON.stringify({ "_id": courseId }),
         headers: {
-          "Content-Type": "application/json",
-          'Authorization': bearer
+            "Content-Type": "application/json",
+            'Authorization': bearer
         },
         credentials: "same-origin"
     })
-    .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          var error = new Error('Error ' + response.status + ': ' + response.statusText);
-          error.response = response;
-          throw error;
-        }
-      },
-      error => {
-            throw error;
-      })
-    .then(response => response.json())
-    .then(favorites => { console.log('Favorite Added', favorites); dispatch(addFavorites(favorites)); })
-    .catch(error => dispatch(favoritesFailed(error.message)));
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(favorites => { console.log('Favorite Added', favorites); dispatch(addFavorites(favorites)); })
+        .catch(error => dispatch(favoritesFailed(error.message)));
 }
 
 export const deleteFavorite = (courseId) => (dispatch) => {
@@ -336,25 +342,25 @@ export const deleteFavorite = (courseId) => (dispatch) => {
     return fetch(baseUrl + 'enrolledCourses/' + courseId, {
         method: "DELETE",
         headers: {
-          'Authorization': bearer
+            'Authorization': bearer
         },
         credentials: "same-origin"
     })
-    .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          var error = new Error('Error ' + response.status + ': ' + response.statusText);
-          error.response = response;
-          throw error;
-        }
-      },
-      error => {
-            throw error;
-      })
-    .then(response => response.json())
-    .then(favorites => { console.log('Favorite Deleted', favorites); dispatch(addFavorites(favorites)); })
-    .catch(error => dispatch(favoritesFailed(error.message)));
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(favorites => { console.log('Favorite Deleted', favorites); dispatch(addFavorites(favorites)); })
+        .catch(error => dispatch(favoritesFailed(error.message)));
 };
 
 export const fetchFavorites = () => (dispatch) => {
@@ -367,23 +373,23 @@ export const fetchFavorites = () => (dispatch) => {
             'Authorization': bearer
         },
     })
-    .then(response => {
-        if (response.ok) {
-            return response;
-        }
-        else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-        }
-    },
-    error => {
-        var errmess = new Error(error.message);
-        throw errmess;
-    })
-    .then(response => response.json())
-    .then(favorites => dispatch(addFavorites(favorites)))
-    .catch(error => dispatch(favoritesFailed(error.message)));
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(favorites => dispatch(addFavorites(favorites)))
+        .catch(error => dispatch(favoritesFailed(error.message)));
 }
 
 export const favoritesLoading = () => ({
@@ -441,3 +447,59 @@ export const addCourseItems = (courseItems) => ({
 
 
 
+export const signupUser = (creds) => (dispatch) => {
+    // We dispatch requestLogin to kickoff the call to the API
+    dispatch(requestSignup())
+
+    return fetch(baseUrl + 'users/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(creds)
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(response => {
+            if (response.success) {
+                
+                dispatch(receiveSignup(response));
+            }
+            else {
+                var error = new Error('Error ' + response.status);
+                error.response = response;
+                throw error;
+            }
+        })
+        .catch(error => dispatch(signupError(error.message)))
+};
+
+export const requestSignup = () => {
+    return {
+        type: ActionTypes.SIGNUP_REQUEST
+    }
+}
+
+export const receiveSignup = (response) => {
+    return {
+        type: ActionTypes.SIGNUP_SUCCESS
+    }
+}
+
+export const signupError = (message) => {
+    return {
+        type: ActionTypes.SIGNUP_FAILURE,
+        message
+    }
+}

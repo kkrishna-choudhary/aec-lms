@@ -41,7 +41,7 @@ export const Auth = (state = {
                 isAuthenticated: false,
                 token: '',
                 user: null
-            };
+            }
         default:
             return state
     }

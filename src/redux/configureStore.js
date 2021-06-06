@@ -10,6 +10,9 @@ import { Auth } from './auth';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { InitialFeedback } from './forms';
+import { InitialLogin } from './forms';
+import { InitialSignup } from './forms';
+import { Signup } from './signup';
 
 export const ConfigureStore = () => {
     const store = createStore(
@@ -20,9 +23,13 @@ export const ConfigureStore = () => {
             developers: Developers,
             courseItems: CourseItems,
             auth: Auth,
+            signupStatus: Signup,
             favorites,
             ...createForms({
-                feedback: InitialFeedback
+                feedback: InitialFeedback,
+                login:InitialLogin,
+                signup:InitialSignup
+
             })
         }),
         applyMiddleware(thunk, logger)

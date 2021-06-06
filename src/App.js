@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
+import queryString from "query-string";
 
 const store = ConfigureStore();
 
