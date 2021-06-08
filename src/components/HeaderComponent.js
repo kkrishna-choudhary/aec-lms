@@ -84,7 +84,7 @@ class Header extends Component {
     render() {
         return (
             <React.Fragment>
-                <Navbar dark expand="md">
+                <Navbar dark fixed="top" expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className="mr-auto" href="/">
@@ -149,13 +149,16 @@ class Header extends Component {
                         </Collapse>
                     </div>
                 </Navbar>
-                <Jumbotron>
+                <Jumbotron fluid>
                     <div className="container">
                         <div className="row row-header">
-                            <div className="col-12 col-sm-6">
-                                <h1>Ristorante Con Fusion</h1>
-                                <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
+                            <div className="col-12 col-sm-8">
+                                <h1 >The latest digital skills, within reach.</h1>
+                                <p className="lead">Discover the fastest, most effective way to gain job-ready expertise for the careers of the future.</p>
                             </div>
+                            <div className="col-12 col-sm-4">
+                            <img src="assets/images/4.png" alt="" className="img-fluid" />
+                        </div>
                         </div>
                     </div>
                 </Jumbotron>

@@ -6,9 +6,9 @@ import { Loading } from './LoadingComponent';
 
 function RenderMenuItem({ course, deleteFavorite }) {
     return(
-        <Media tag="li">
+        <Media tag="li" >
             <Media left middle>
-                <Media object src={baseUrl + course.image} alt={course.name} />
+                <Media  className="mediaheightissue" object src={baseUrl + course.image} alt={course.name} />
             </Media>
             <Media body className="ml-5">
                 <Media heading>{course.name}</Media>
@@ -45,7 +45,7 @@ const Favorites = (props) => {
 
         const favorites = props.favorites.favorites.courses.map((course) => {
             return (
-                <div key={course._id} className="col-12 mt-5">
+                <div key={course._id} className="col-12 mt-5 ">
                     <RenderMenuItem course={course} deleteFavorite={props.deleteFavorite} />
                 </div>
             );

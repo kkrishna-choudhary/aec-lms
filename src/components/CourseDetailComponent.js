@@ -17,7 +17,7 @@ import { Player } from 'video-react';
                             exitTransform: 'scale(0.5) translateY(-50%)'
                         }}>
                         <Card >
-                            <CardImg top src={baseUrl + course.image} alt={course.name} />
+                            <CardImg className="heightissue" top src={baseUrl + course.image} alt={course.name} />
                             <CardImgOverlay>
                                 <Button outline color="primary" onClick={() => favorite ? console.log('Already favorite') : postFavorite(course._id)}>
                                     {favorite ?
@@ -71,9 +71,9 @@ import { Player } from 'video-react';
         if (courseItems != null) {
             const rate = courseItems.map((courseItem) => {
                 return (
-                    <div key={courseItem._id} className="mb-5 " >
+                    <div key={courseItem._id} className="mb-5   " >
                         
-                        <Player
+                        <Player 
                             playsInlines
                             poster={baseUrl + course.image}
                             src={baseUrl + courseItem.video}
@@ -89,9 +89,9 @@ import { Player } from 'video-react';
             return (
                 <div>
                     <Stagger in>
-                        <h4>Content</h4>
-                        <Fade in>
-                            {rate}
+                        <h4>Contents</h4>
+                        <Fade in>                  
+                            {rate}                  
                         </Fade>
                     </Stagger>
     
@@ -204,13 +204,20 @@ import { Player } from 'video-react';
                     </div>
                     <div className="row">
                         <RenderCourse course={props.course} favorite={props.favorite} postFavorite={props.postFavorite} />
+                        <div className="col-12 col-md-5 ">{props.course.description}</div>
+                    </div>
+
+                    
+                    <div className="row row-gap ">
+                        <div className="col-12 offset-3 col-md-6">
+                            <RenderCourseItem courseItems={props.courseItems} course={props.course} />
+                        </div>
+                    </div>
+                    <div className="row " >
+                        <div className="col-12">
                         <RenderComments comments={props.comments}
                             postComment={props.postComment}
                             courseId={props.course._id} />
-                    </div>
-                    <div className="row">
-                        <div className="col-12">
-                            <RenderCourseItem courseItems={props.courseItems} course={props.course} />
                         </div>
                     </div>
                 </div>

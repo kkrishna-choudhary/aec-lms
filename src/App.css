@@ -3,6 +3,11 @@
   padding:0px auto;
 }
 
+.row-gap{
+  margin:200px auto;
+  padding:0px auto;
+}
+
 .row-content {
   margin:0px auto;
   padding: 50px 0px 50px 0px;
@@ -16,9 +21,9 @@
   padding: 20px 0px 20px 0px;
 }
 .jumbotron {
-  padding:70px 30px 70px 30px;
+  padding:100px 20px 100px 20px;
   margin:0px auto;
-  background: #9575CD ;
+  background: #21094e ;
   color:floralwhite;
 }
 
@@ -30,7 +35,7 @@ address{
 
 
 .navbar-dark {
-  background-color: #512DA8;
+  background-color: #21094e;
 }
 
 .page-enter {
@@ -56,10 +61,31 @@ address{
 }
 
 .model-bodycolor {
-  background:#9575CD ;
+  background:floralwhite ;
+  color:#31126b;
 }
 
 .model-headercolor {
-  background:#512DA8 ;
+  background:#31126b ;
+  
 }
 
+.carouselstyle{
+  
+  object-fit: cover;
+}
+
+  
+.heightissue {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.mediaheightissue {
+  min-width: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  min-height: 200px;
+  object-fit: cover;
+}
