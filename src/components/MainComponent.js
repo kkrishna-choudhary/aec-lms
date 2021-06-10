@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import Home from './HomeComponent';
+import Home from './HomePage/HomeComponent';
 import About from './AboutComponent';
-import Menu from './MenuComponent';
+import Menu from './MenuComponent/MenuComponent';
 import Contact from './ContactComponent';
-import CourseDetail from './CourseDetailComponent';
-import Favorites from './FavoriteComponent';
-import Header from './HeaderComponent';
-import Footer from './FooterComponent';
+import CourseDetail from './MenuComponent/CourseDetailComponent';
+import Favorites from './FavoriteComponent/FavoriteComponent';
+import Header from './CommonComponent/HeaderComponent';
+import Footer from './CommonComponent/FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers,signupUser, loginUser,logoutUser, fetchFavorites, postFavorite, deleteFavorite, receiveLogin } from '../redux/ActionCreators';
+import { postAddCourse,postImageUpload, postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers,signupUser,fetchUserInfos, loginUser,logoutUser, fetchFavorites, postFavorite, deleteFavorite, receiveLogin } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -23,7 +23,8 @@ const mapStateToProps = state => {
       favorites: state.favorites,
       courseItems: state.courseItems,
       auth: state.auth,
-      signupStatus: state.signupStatus
+      signupStatus: state.signupStatus,
+      userInfos: state.userInfos
     }
 }
 
@@ -34,14 +35,18 @@ const mapDispatchToProps = (dispatch) => ({
   resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
   resetSignupForm: () => { dispatch(actions.reset('signup'))},
   resetLoginForm: () => { dispatch(actions.reset('login'))},
+  resetAddCourseForm: () => { dispatch(actions.reset('addcourse'))},
   fetchComments: () => {dispatch(fetchComments())},
   fetchPromos: () => {dispatch(fetchPromos())},
   fetchDevelopers: () => dispatch(fetchDevelopers()),
   fetchCourseItems: () => { dispatch(fetchCourseItems()) },
   postFeedback: (feedback) => dispatch(postFeedback(feedback)),
+  postAddCourse: (newCourse) => dispatch(postAddCourse(newCourse)),
+  postImageUpload: (image) => dispatch(postImageUpload(image)),
   loginUser: (creds) => dispatch(loginUser(creds)),
   signupUser: (creds) => dispatch(signupUser(creds)),
   logoutUser: () => dispatch(logoutUser()),
+  fetchUserInfos: () => dispatch(fetchUserInfos()),
   fetchFavorites: () => dispatch(fetchFavorites()),
   postFavorite: (courseId) => dispatch(postFavorite(courseId)),
   deleteFavorite: (courseId) => dispatch(deleteFavorite(courseId))
@@ -55,6 +60,7 @@ class Main extends Component {
     this.props.fetchPromos();
     this.props.fetchDevelopers();
     this.props.fetchFavorites();
+    this.props.fetchUserInfos();
     this.props.fetchCourseItems();
   }
 
@@ -137,7 +143,7 @@ class Main extends Component {
             <Switch>
               <Route path="/home" component={HomePage} />
               <Route exact path='/aboutus' component={() => <About developers={this.props.developers} />} />
-              <Route exact path="/menu" component={() => <Menu courses={this.props.courses} />} />
+              <Route exact path="/menu" component={() => <Menu courses={this.props.courses} auth={this.props.auth}  postImageUpload={this.props.postImageUpload}  user={this.props.userInfos.userInfos} resetAddCourseForm={this.props.resetAddCourseForm} postAddCourse={this.props.postAddCourse} />} />
               <Route path="/menu/:courseId" component={CourseWithId} />
               <PrivateRoute exact path="/favorites" component={() => <Favorites favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} />} />
               <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback} />} />

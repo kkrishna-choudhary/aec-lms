@@ -19,3 +19,14 @@ export const InitialSignup = {
     firstname:'',
     lastname:''
 }
+
+export const InitialAddCourse = {
+    label: '',
+    featured: 'false',
+    name:'',
+    courseDuration:'',
+    category: "",
+    fee: "",
+    description: "",
+    image: "images/"
+}

@@ -12,7 +12,10 @@ import logger from 'redux-logger';
 import { InitialFeedback } from './forms';
 import { InitialLogin } from './forms';
 import { InitialSignup } from './forms';
+import { InitialAddCourse } from './forms';
 import { Signup } from './signup';
+import { UserInfos } from './userinfos';
+
 
 export const ConfigureStore = () => {
     const store = createStore(
@@ -24,11 +27,13 @@ export const ConfigureStore = () => {
             courseItems: CourseItems,
             auth: Auth,
             signupStatus: Signup,
+            userInfos:UserInfos,
             favorites,
             ...createForms({
                 feedback: InitialFeedback,
                 login:InitialLogin,
-                signup:InitialSignup
+                signup:InitialSignup,
+                addcourse: InitialAddCourse
 
             })
         }),

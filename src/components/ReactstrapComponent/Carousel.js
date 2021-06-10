@@ -6,7 +6,7 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
-import { baseUrl } from '../shared/baseUrl';
+import { baseUrl } from '../../shared/baseUrl';
 
 const items = [
   {
