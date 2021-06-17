@@ -622,3 +622,83 @@ export const postImageUpload = (image) => (dispatch) => {
         .catch(error => { console.log('image', error.message); alert('Your image could not be posted\nError: ' + error.message); });
 };
 
+
+
+
+export const postAddCourseItem = (courseId, video, title, duration) => (dispatch) => {
+
+    const newCourseItem = {
+        course: courseId,
+        title: title,
+        video: video,
+        duration: duration
+    }
+    console.log('CourseItem ', newCourseItem);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'courseItems', {
+        method: 'POST',
+        body: JSON.stringify(newCourseItem),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(response => {console.log('courseItem', response); alert('CourseItemadded!\n' + JSON.stringify(response));dispatch(fetchCourseItems());})
+        .catch(error => {
+            console.log('Post courseItems ', error.message);
+            alert('Your courseItem could not be posted\nError: ' + error.message);
+        })
+}
+
+
+
+export const postVideoUpload = (video) => (dispatch) => {
+
+    const formData = new FormData()
+    formData.append(
+        'videoFile',
+        video
+    );
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'videoUpload', {
+        method: "POST",
+        body: formData,
+        headers: {
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(response => {console.log('video', response); alert('video Uploaded!\n' + JSON.stringify(response));})
+        .catch(error => { console.log('video', error.message); alert('Your video could not be posted\nError: ' + error.message); });
+};

@@ -214,7 +214,9 @@ import CourseItem from './CourseItem';
                         {/* <div className="col-12 offset-3 col-md-6">
                             <RenderCourseItem courseItems={props.courseItems} course={props.course} />
                         </div> */}
-                        <CourseItem courseitems={props.courseItems}></CourseItem>
+                        
+                            <CourseItem courseId={props.course._id} courseitems={props.courseItems}  auth={props.auth} user={props.user} postAddCourseItem={props.postAddCourseItem}     postVideoUpload={props.postVideoUpload}  ></CourseItem>
+                       
                     </div>
                     <div className="row " >
                         <div className="col-12">

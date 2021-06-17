@@ -9,7 +9,7 @@ import Header from './CommonComponent/HeaderComponent';
 import Footer from './CommonComponent/FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postAddCourse,postImageUpload, postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers,signupUser,fetchUserInfos, loginUser,logoutUser, fetchFavorites, postFavorite, deleteFavorite, receiveLogin } from '../redux/ActionCreators';
+import { postAddCourse, postAddCourseItem, postVideoUpload,postImageUpload, postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers,signupUser,fetchUserInfos, loginUser,logoutUser, fetchFavorites, postFavorite, deleteFavorite, receiveLogin } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -43,6 +43,8 @@ const mapDispatchToProps = (dispatch) => ({
   postFeedback: (feedback) => dispatch(postFeedback(feedback)),
   postAddCourse: (newCourse) => dispatch(postAddCourse(newCourse)),
   postImageUpload: (image) => dispatch(postImageUpload(image)),
+  postAddCourseItem: (courseId, video, title, duration) => dispatch(postAddCourseItem(courseId, video, title, duration)),
+  postVideoUpload: (video) => dispatch(postVideoUpload(video)),
   loginUser: (creds) => dispatch(loginUser(creds)),
   signupUser: (creds) => dispatch(signupUser(creds)),
   logoutUser: () => dispatch(logoutUser()),
@@ -100,7 +102,10 @@ class Main extends Component {
           //favorite={this.props.favorites.favorites.courses.some((course) => course._id === match.params.courseId)}
           postFavorite={this.props.postFavorite}
           courseItems={this.props.courseItems.courseItems.filter((courseItem) => courseItem.course === match.params.courseId)}
-         
+          user={this.props.userInfos.userInfos} 
+          auth={this.props.auth}
+          postAddCourseItem={this.props.postAddCourseItem}
+          postVideoUpload={this.props.postVideoUpload}
           />
         :
         <CourseDetail course={this.props.courses.courses.filter((course) => course._id === match.params.courseId)[0]}
@@ -112,7 +117,10 @@ class Main extends Component {
           favorite={false}
           postFavorite={this.props.postFavorite}
           courseItems={this.props.courseItems.courseItems.filter((courseItem) => courseItem.course ===match.params.courseId)}
-          
+          user={this.props.userInfos.userInfos} 
+          auth={this.props.auth}
+          postAddCourseItem={this.props.postAddCourseItem}
+          postVideoUpload={this.props.postVideoUpload}
           />
       );
     }
