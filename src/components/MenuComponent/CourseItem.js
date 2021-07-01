@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Collapse, CardBody, Card, CardHeader, Button } from 'reactstrap';
+import { Collapse, CardBody, Card, CardHeader, Button,CardFooter } from 'reactstrap';
 import { Player } from 'video-react';
 import { baseUrl } from '../../shared/baseUrl';
 import {
@@ -143,6 +143,21 @@ class CourseItem extends Component {
                                         />
                                     </CardBody>
                                 </Collapse>
+
+
+                                {!this.props.auth.isAuthenticated
+                                    ?
+                                    <div></div>
+                                    :
+
+                                    (!this.props.user.admin ? <div></div>
+                                        : <CardFooter>
+                                            <Button className = "ml-auto" outline color="danger" onClick={()=>{this.props.deleteCourseItem(item._id)}}>
+                                                <span className="fa fa-times"></span>
+                                            </Button>
+                                        </CardFooter>)
+                                }
+
                             </Card>
                         )
                     })}

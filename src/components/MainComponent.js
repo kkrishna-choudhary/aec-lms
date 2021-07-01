@@ -9,7 +9,7 @@ import Header from './CommonComponent/HeaderComponent';
 import Footer from './CommonComponent/FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postAddCourse, postAddCourseItem, postVideoUpload,postImageUpload, postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers,signupUser,fetchUserInfos, loginUser,logoutUser, fetchFavorites, postFavorite, deleteFavorite, receiveLogin } from '../redux/ActionCreators';
+import { deleteCourse, deleteCourseItem,postAddCourse, postAddCourseItem, postVideoUpload,postImageUpload, postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers,signupUser,fetchUserInfos, loginUser,logoutUser, fetchFavorites, postFavorite, deleteFavorite, receiveLogin } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -51,7 +51,9 @@ const mapDispatchToProps = (dispatch) => ({
   fetchUserInfos: () => dispatch(fetchUserInfos()),
   fetchFavorites: () => dispatch(fetchFavorites()),
   postFavorite: (courseId) => dispatch(postFavorite(courseId)),
-  deleteFavorite: (courseId) => dispatch(deleteFavorite(courseId))
+  deleteFavorite: (courseId) => dispatch(deleteFavorite(courseId)),
+  deleteCourseItem: (courseItemId) => dispatch(deleteCourseItem(courseItemId)),
+  deleteCourse: (courseId) => dispatch(deleteCourse(courseId))
 });
 
 class Main extends Component {
@@ -106,6 +108,8 @@ class Main extends Component {
           auth={this.props.auth}
           postAddCourseItem={this.props.postAddCourseItem}
           postVideoUpload={this.props.postVideoUpload}
+          deleteCourseItem={this.props.deleteCourseItem}
+          deleteCourse={this.props.deleteCourse}
           />
         :
         <CourseDetail course={this.props.courses.courses.filter((course) => course._id === match.params.courseId)[0]}
@@ -121,6 +125,8 @@ class Main extends Component {
           auth={this.props.auth}
           postAddCourseItem={this.props.postAddCourseItem}
           postVideoUpload={this.props.postVideoUpload}
+          deleteCourseItem={this.props.deleteCourseItem}
+          deleteCourse={this.props.deleteCourse}
           />
       );
     }
@@ -151,7 +157,7 @@ class Main extends Component {
             <Switch>
               <Route path="/home" component={HomePage} />
               <Route exact path='/aboutus' component={() => <About developers={this.props.developers} />} />
-              <Route exact path="/menu" component={() => <Menu courses={this.props.courses} auth={this.props.auth}  postImageUpload={this.props.postImageUpload}  user={this.props.userInfos.userInfos} resetAddCourseForm={this.props.resetAddCourseForm} postAddCourse={this.props.postAddCourse} />} />
+              <Route exact path="/menu" component={() => <Menu courses={this.props.courses} deleteCourse={this.props.deleteCourse} auth={this.props.auth}  postImageUpload={this.props.postImageUpload}  user={this.props.userInfos.userInfos} resetAddCourseForm={this.props.resetAddCourseForm} postAddCourse={this.props.postAddCourse} />} />
               <Route path="/menu/:courseId" component={CourseWithId} />
               <PrivateRoute exact path="/favorites" component={() => <Favorites favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} />} />
               <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback} />} />

@@ -17,7 +17,7 @@ import CourseItem from './CourseItem';
                         transformProps={{
                             exitTransform: 'scale(0.5) translateY(-50%)'
                         }}>
-                        <Card >
+                        <Card key={course._id} >
                             <CardImg className="heightissue" top src={baseUrl + course.image} alt={course.name} />
                             <CardImgOverlay>
                                 <Button outline color="primary" onClick={() => favorite ? console.log('Already favorite') : postFavorite(course._id)}>
@@ -200,9 +200,27 @@ import CourseItem from './CourseItem';
                             <BreadcrumbItem active>{props.course.name}</BreadcrumbItem>
                         </Breadcrumb>
                         <div className="col-12">
-                            <h3>{props.course.name}</h3>
-                            <hr />
-                        </div>
+                        <div className="row">
+                            <h3 className="col-10">{props.course.name}</h3>
+                          
+
+                            {  !props.auth.isAuthenticated
+                                     ?
+                                       <div>notauthenticated</div>
+                                        :
+                                       
+                                            ( !props.user.admin?<div>false</div>
+                                                :   <div>
+                                                    <Button outline color="danger" onClick={()=>{props.deleteCourse(props.course._id)}} >
+                                                        Delete Course 
+                                                        </Button>
+                                                     </div>)
+                            }                                
+                        
+                                
+                        </div>                           
+                        <hr />
+                    </div>
                     </div>
                     <div className="row">
                         <RenderCourse course={props.course} favorite={props.favorite} postFavorite={props.postFavorite} />
@@ -215,7 +233,7 @@ import CourseItem from './CourseItem';
                             <RenderCourseItem courseItems={props.courseItems} course={props.course} />
                         </div> */}
                         
-                            <CourseItem courseId={props.course._id} courseitems={props.courseItems}  auth={props.auth} user={props.user} postAddCourseItem={props.postAddCourseItem}     postVideoUpload={props.postVideoUpload}  ></CourseItem>
+                            <CourseItem  courseId={props.course._id} courseitems={props.courseItems}  auth={props.auth} user={props.user} postAddCourseItem={props.postAddCourseItem}     postVideoUpload={props.postVideoUpload}  deleteCourseItem={props.deleteCourseItem} ></CourseItem>
                        
                     </div>
                     <div className="row " >

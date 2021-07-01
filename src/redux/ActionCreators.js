@@ -702,3 +702,63 @@ export const postVideoUpload = (video) => (dispatch) => {
         .then(response => {console.log('video', response); alert('video Uploaded!\n' + JSON.stringify(response));})
         .catch(error => { console.log('video', error.message); alert('Your video could not be posted\nError: ' + error.message); });
 };
+
+
+export const deleteCourseItem = (courseItemId) => (dispatch) => {
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'courseItems/' + courseItemId, {
+        method: "DELETE",
+        headers: {
+            'Authorization': bearer
+        },
+        credentials: "same-origin"
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(courseItems => { console.log('Course Item Deleted', courseItems);  alert('Your deleteCourseItem has been successfully deleted ' + courseItems);  dispatch(fetchCourseItems()); })
+        .catch(error =>  { console.log('Delete CourseItem', error.message); alert('Your courseItem could not be deleted\nError: ' + error.message); });
+};
+
+
+
+export const deleteCourse = (courseId) => (dispatch) => {
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'courses/' + courseId, {
+        method: "DELETE",
+        headers: {
+            'Authorization': bearer
+        },
+        credentials: "same-origin"
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(course => { console.log('Course  Deleted', course); alert('Your deleteCourse has been successfully deleted ' + course); dispatch(fetchCourses()); })
+        .catch(error =>  { console.log('Delete Course', error.message); alert('Your deleteCourse could not be deleted\nError: ' + error.message); });
+};
+
