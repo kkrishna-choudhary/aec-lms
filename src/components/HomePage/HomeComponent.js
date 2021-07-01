@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle,CardDeck,Button } from 'reactstrap';
-import { Loading } from '../CommonComponent/LoadingComponent';
-import { baseUrl } from '../../shared/baseUrl';
+import { CardDeck } from 'reactstrap';
 import { FadeTransform } from 'react-animation-components';
 import RenderCard from '../ReactstrapComponent/CardComponents';
 import Example from '../ReactstrapComponent/Carousel';
+import About from '../AboutComponent';
+
 // function RenderCard({ item, isLoading, errMess, type, passedTitle,  passedSubtitle, passedtext}) {
 //     if (isLoading) {
 //         return (
@@ -83,8 +83,18 @@ function Home(props) {
                 </div>
             
         </div>
+        <div>
+            <About developers={props.developers}  ></About>
+        </div>
+
+
         <div className="container">
             <div className="row row-content align-items-start">
+            <FadeTransform in
+                    transformProps={{
+                        exitTransform: 'scale(0.5) translateY(-50%)'
+                    }}>
+                <CardDeck>
                 <div className="col-12 col-md m-1">
                     <RenderCard item={props.course}
                         isLoading={props.coursesLoading}
@@ -103,6 +113,8 @@ function Home(props) {
                         errMess={props.developerErrMess}
                         type="imagecard" />
                 </div>
+                </CardDeck>
+                </FadeTransform>
             </div>
         </div>
         </React.Fragment>

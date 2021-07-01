@@ -10,19 +10,19 @@ import { baseUrl } from '../../shared/baseUrl';
 
 const items = [
   {
-    src: baseUrl + "images/react.jpg",
-    altText: 'REACT',
-    caption: 'React'
+    src: baseUrl + "images/3.png",
+    altText: 'CPP',
+    caption: 'Cpp'
   },
   {
-    src: baseUrl + "images/react.jpg",
-    altText: 'REACT',
-    caption: 'React'
+    src: baseUrl + "images/2.png",
+    altText: 'PYTHON',
+    caption: 'Python'
   },
   {
-    src: baseUrl + "images/react.jpg",
-    altText: 'REACT',
-    caption: 'React'
+    src: baseUrl + "images/4.png",
+    altText: 'PHP',
+    caption: 'Php'
   }
 ];
 
@@ -49,13 +49,13 @@ const Example = ({course}) => {
 
   const slides = items.map((item) => {
     return (
-      <CarouselItem
+      <CarouselItem className="w-100"
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <img className="carouselstyle" src={item.src} alt={item.altText} />
-        <CarouselCaption captionText={item.altText} captionHeader={item.caption} />
+        <img className="carouselstyle" width= "80%" src={item.src} alt={item.altText} />
+        <CarouselCaption className="carousel-caption" captionText={item.altText} captionHeader={item.caption} />
       </CarouselItem>
     );
   });

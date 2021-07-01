@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardFooter, Breadcrumb, BreadcrumbItem, CardText, CardDeck, CardHeader } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardFooter, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Loading } from '../CommonComponent/LoadingComponent';
 import { baseUrl } from '../../shared/baseUrl';
-import RenderCard from '../ReactstrapComponent/CardComponents';
+
 
 import {
     Button, Modal, ModalHeader, ModalBody,
@@ -15,8 +15,6 @@ import { Control, Form, Errors } from 'react-redux-form';
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
-const isNumber = (val) => !isNaN(Number(val));
-const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 
 function RenderMenuItem({ course, onClick ,auth,user,deleteCourse }) {
@@ -34,10 +32,10 @@ function RenderMenuItem({ course, onClick ,auth,user,deleteCourse }) {
             
             {  !auth.isAuthenticated
                                      ?
-                                       <div>notauthenticated</div>
+                                       <div></div>
                                         :
                                        
-                                            ( !user.admin?<div>false</div>
+                                            ( !user.admin?<div></div>
                                                 :   <div className="ml-auto">
                                                         <Button outline color="danger" onClick={()=>{deleteCourse(course._id)}} >
                                                             <span className="fa fa-times"></span>
@@ -49,7 +47,7 @@ function RenderMenuItem({ course, onClick ,auth,user,deleteCourse }) {
         
             
 
-        <Link to={`/menu/${course._id}`} >
+        <Link to={`/menu/${course._id}`} style={{ textDecoration: 'none'}} >
             
                 <CardImg className="heightissue" src={baseUrl + course.image} alt="Card image cap" />
                 <CardImgOverlay>
@@ -100,8 +98,9 @@ class Menu extends Component {
     handleAddCourseSubmit = (values) => {
         this.toggleAddCourseModal();
         console.log("Current State is: " + JSON.stringify(values));
-        this.props.postAddCourse(values);
         this.props.resetAddCourseForm();
+        this.props.postAddCourse(values);
+        
 
     }
 
@@ -150,10 +149,10 @@ class Menu extends Component {
 
                                 {!this.props.auth.isAuthenticated
                                     ?
-                                    <div>notauthenticated</div>
+                                    <div></div>
                                     :
 
-                                    (!this.props.user.admin ? <div>false</div>
+                                    (!this.props.user.admin ? <div></div>
                                         : <div>
                                             <Button outline onClick={this.toggleAddCourseModal} >
                                                 Add New Course
@@ -204,8 +203,9 @@ class Menu extends Component {
                                             <Col md={8} >
                                                 <Control.select model=".featured" name="featured"
                                                     className="form-control">
-                                                    <option>true</option>
-                                                    <option>false</option>
+                                                    <option value="" selected disabled>Choose here</option>
+                                                    <option value="true">true</option>
+                                                    <option value="false">false</option>
                                                 </Control.select>
                                             </Col>
                                         </Row>

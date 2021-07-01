@@ -85,6 +85,7 @@ class Main extends Component {
           developer={this.props.developers.developers.filter((developer) => developer.featured)[0]}
           developerLoading={this.props.developers.isLoading}
           developerErrMess={this.props.developers.errMess}
+          developers={this.props.developers} 
         />
       );
     }
@@ -109,7 +110,6 @@ class Main extends Component {
           postAddCourseItem={this.props.postAddCourseItem}
           postVideoUpload={this.props.postVideoUpload}
           deleteCourseItem={this.props.deleteCourseItem}
-          deleteCourse={this.props.deleteCourse}
           />
         :
         <CourseDetail course={this.props.courses.courses.filter((course) => course._id === match.params.courseId)[0]}
@@ -126,7 +126,6 @@ class Main extends Component {
           postAddCourseItem={this.props.postAddCourseItem}
           postVideoUpload={this.props.postVideoUpload}
           deleteCourseItem={this.props.deleteCourseItem}
-          deleteCourse={this.props.deleteCourse}
           />
       );
     }
@@ -156,7 +155,6 @@ class Main extends Component {
           <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
             <Switch>
               <Route path="/home" component={HomePage} />
-              <Route exact path='/aboutus' component={() => <About developers={this.props.developers} />} />
               <Route exact path="/menu" component={() => <Menu courses={this.props.courses} deleteCourse={this.props.deleteCourse} auth={this.props.auth}  postImageUpload={this.props.postImageUpload}  user={this.props.userInfos.userInfos} resetAddCourseForm={this.props.resetAddCourseForm} postAddCourse={this.props.postAddCourse} />} />
               <Route path="/menu/:courseId" component={CourseWithId} />
               <PrivateRoute exact path="/favorites" component={() => <Favorites favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} />} />

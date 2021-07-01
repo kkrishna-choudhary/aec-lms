@@ -758,7 +758,7 @@ export const deleteCourse = (courseId) => (dispatch) => {
                 throw error;
             })
         .then(response => response.json())
-        .then(course => { console.log('Course  Deleted', course); alert('Your deleteCourse has been successfully deleted ' + course); dispatch(fetchCourses()); })
+        .then(course => { console.log('Course  Deleted', course); dispatch(fetchFavorites());alert('Your deleteCourse has been successfully deleted ' + course); dispatch(fetchCourses()); })
         .catch(error =>  { console.log('Delete Course', error.message); alert('Your deleteCourse could not be deleted\nError: ' + error.message); });
 };
 

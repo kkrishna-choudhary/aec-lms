@@ -6,14 +6,11 @@ import {
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { Control, Form, Errors } from 'react-redux-form';
-import { baseUrl } from '../../shared/baseUrl';
 
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
-const isNumber = (val) => !isNaN(Number(val));
-const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 
 class Header extends Component {
@@ -88,8 +85,8 @@ class Header extends Component {
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className="mr-auto" href="/">
-                            <img src="assets/images/logo.png" height="30" width="41"
-                                alt="Ristorante Con Fusion" />
+                            <img src="assets/images/aec.png" height="50" width="50"
+                                alt="Aec-LMS" />
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
@@ -98,11 +95,7 @@ class Header extends Component {
                                         <span className="fa fa-home fa-lg"></span> Home
                                     </NavLink>
                                 </NavItem>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/aboutus">
-                                        <span className="fa fa-info fa-lg"></span> About Us
-                                    </NavLink>
-                                </NavItem>
+                
                                 <NavItem>
                                     <NavLink className="nav-link" to="/menu">
                                         <span className="fa fa-list fa-lg"></span> Menu
@@ -225,7 +218,7 @@ class Header extends Component {
                                     </Row>
                                 </Form>
                                 <hr />
-                                <Button  className="model-bodycolor justify-content-end" onClick={this.toggleSignupModal}>Signup</Button>
+                                <pre>Don't have an account?  <Button  className="model-bodycolor justify-content-end" onClick={this.toggleSignupModal}>Signup</Button></pre>
                             </div>
                         </div>
                    
@@ -333,11 +326,12 @@ class Header extends Component {
                                             <Button type="submit" className="model-headercolor float-right">
                                                 Signup
                                             </Button>
+                                            
                                         </Col>
                                     </Row>
                                 </Form>
                                 <hr/>
-                                <Button className="model-bodycolor" onClick= {this.toggleLoginModal}>Login</Button>
+                                <pre> Already have an account?  <Button className="model-bodycolor" onClick= {this.toggleLoginModal}>Login</Button> </pre> 
                             </div>
                         </div>
 

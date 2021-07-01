@@ -68,10 +68,10 @@ class CourseItem extends Component {
                     <div className="ml-auto">
                         {!this.props.auth.isAuthenticated
                             ?
-                            <div>notauthenticated</div>
+                            <div></div>
                             :
 
-                            (!this.props.user.admin ? <div>false</div>
+                            (!this.props.user.admin ? <div></div>
                                 : <div>
                                     <Button outline onClick={this.toggleAddCourseItemModal} >
                                         Add New CourseItem

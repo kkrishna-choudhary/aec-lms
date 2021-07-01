@@ -201,23 +201,7 @@ import CourseItem from './CourseItem';
                         </Breadcrumb>
                         <div className="col-12">
                         <div className="row">
-                            <h3 className="col-10">{props.course.name}</h3>
-                          
-
-                            {  !props.auth.isAuthenticated
-                                     ?
-                                       <div>notauthenticated</div>
-                                        :
-                                       
-                                            ( !props.user.admin?<div>false</div>
-                                                :   <div>
-                                                    <Button outline color="danger" onClick={()=>{props.deleteCourse(props.course._id)}} >
-                                                        Delete Course 
-                                                        </Button>
-                                                     </div>)
-                            }                                
-                        
-                                
+                            <h3 className="col-10">{props.course.name}</h3>   
                         </div>                           
                         <hr />
                     </div>

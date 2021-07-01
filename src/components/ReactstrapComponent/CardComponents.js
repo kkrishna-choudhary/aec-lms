@@ -1,9 +1,7 @@
-import react from 'react';
 import { Loading } from '../CommonComponent/LoadingComponent';
 import { baseUrl } from '../../shared/baseUrl';
-import { FadeTransform } from 'react-animation-components';
 
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle,CardDeck,CardFooter,CardImgOverlay } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle,CardFooter,CardImgOverlay } from 'reactstrap';
 
 function RenderCard({ item, isLoading, errMess, type, passedTitle,  passedSubtitle, passedtext, course}) {
     if (isLoading) {
@@ -17,24 +15,21 @@ function RenderCard({ item, isLoading, errMess, type, passedTitle,  passedSubtit
         );
     } 
     else
-        if (type=="imagecard") {
+        if (type === "imagecard") {
             return (
-                <FadeTransform in
-                    transformProps={{
-                        exitTransform: 'scale(0.5) translateY(-50%)'
-                    }}>
-                    <Card>
-                    <CardImg src={baseUrl + item.image} alt={item.name} />
+                
+                        
+                    <>
+                    <CardImg className="heightissue" src={baseUrl + item.image} alt={item.name} />
                     <CardBody>
                         <CardTitle>{item.name}</CardTitle>
-                        {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
                         <CardText>{item.description}</CardText>
                     </CardBody>
-                </Card>
-            </FadeTransform>
+                </>
+           
         );
     }
-    else if(type=="normal") {
+    else if(type === "normal") {
         return (
                     <Card body inverse style={{ backgroundColor: '#21094e', borderColor: '#21094e' }}>
                         <CardBody   className="text-center">
@@ -46,7 +41,7 @@ function RenderCard({ item, isLoading, errMess, type, passedTitle,  passedSubtit
                     </Card>                
         );
     }
-    else if(type=="imageoverlayCard"){
+    else if(type === "imageoverlayCard"){
         return (
             <Card >
             
