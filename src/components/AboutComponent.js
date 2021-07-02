@@ -7,8 +7,8 @@ import { Fade, Stagger } from 'react-animation-components';
 function RenderDeveloper({developer}) {
     return(
         <Media tag="li">
-            <Media left middle>
-                <Media object src={baseUrl + developer.image} alt={developer.name} />
+            <Media lef>
+                <Media height="125px" width="125px" object src={baseUrl + developer.image} alt={developer.name} />
             </Media>
             <Media body className="ml-5">
                 <Media heading>{developer.name}</Media>
