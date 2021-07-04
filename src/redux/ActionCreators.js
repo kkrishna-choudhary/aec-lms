@@ -192,7 +192,7 @@ export const addDevelopers = (developers) => ({
 
 export const postFeedback = (feedback) => (dispatch) => {
 
-    return fetch(baseUrl + 'feedback', {
+    return fetch(baseUrl + 'feedbacks', {
         method: "POST",
         body: JSON.stringify(feedback),
         headers: {

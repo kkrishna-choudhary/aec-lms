@@ -80,7 +80,7 @@ class CourseItem extends Component {
                         }
                     </div>
                     <Modal isOpen={this.state.isAddCourseItemModalOpen} toggle={this.toggleAddCourseItemModal}>
-                        <ModalHeader toggle={this.toggleAddCourseItemModal}>Submit CourseItem</ModalHeader>
+                        <ModalHeader className="model-headercolor" toggle={this.toggleAddCourseItemModal}>Submit CourseItem</ModalHeader>
                         <ModalBody>
                             <LocalForm onSubmit={(values) => this.handleAddCourseItemSubmit(values)}>
                                 <Row className="form-group">
@@ -118,7 +118,7 @@ class CourseItem extends Component {
                                             />
                                     </Col>
                                 </Row>
-                                <Button type="submit" className="bg-primary">
+                                <Button type="submit" className="model-headercolor">
                                     Post CourseItem
                                 </Button>
                             </LocalForm>
@@ -134,7 +134,6 @@ class CourseItem extends Component {
                                 <Collapse isOpen={collapse === item._id}>
                                     <CardBody >
                                         <Player
-
                                             playsInlines
                                             src={baseUrl + item.video}
                                             fluid={false}
@@ -152,7 +151,7 @@ class CourseItem extends Component {
 
                                     (!this.props.user.admin ? <div></div>
                                         : <CardFooter>
-                                            <Button className = "ml-auto" outline color="danger" onClick={()=>{this.props.deleteCourseItem(item._id)}}>
+                                            <Button className="ml-auto" outline color="danger" onClick={()=>{this.props.deleteCourseItem(item._id)}}>
                                                 <span className="fa fa-times"></span>
                                             </Button>
                                         </CardFooter>)

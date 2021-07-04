@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Home from './HomePage/HomeComponent';
-import About from './AboutComponent';
+// import About from './AboutComponent';
 import Menu from './MenuComponent/MenuComponent';
 import Contact from './ContactComponent';
 import CourseDetail from './MenuComponent/CourseDetailComponent';
@@ -9,7 +9,7 @@ import Header from './CommonComponent/HeaderComponent';
 import Footer from './CommonComponent/FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { deleteCourse, deleteCourseItem,postAddCourse, postAddCourseItem, postVideoUpload,postImageUpload, postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers,signupUser,fetchUserInfos, loginUser,logoutUser, fetchFavorites, postFavorite, deleteFavorite, receiveLogin } from '../redux/ActionCreators';
+import { deleteCourse, deleteCourseItem,postAddCourse, postAddCourseItem, postVideoUpload,postImageUpload, postComment, postFeedback, fetchCourses, fetchComments, fetchCourseItems, fetchPromos, fetchDevelopers,signupUser,fetchUserInfos, loginUser,logoutUser, fetchFavorites, postFavorite, deleteFavorite } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 

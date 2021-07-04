@@ -7,7 +7,7 @@ import { Control, LocalForm } from 'react-redux-form';
 import { Loading } from '../CommonComponent/LoadingComponent';
 import { baseUrl } from '../../shared/baseUrl';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
-import { Player } from 'video-react';
+
 import CourseItem from './CourseItem';
 
     function RenderCourse({course, favorite, postFavorite}) {
@@ -69,44 +69,44 @@ import CourseItem from './CourseItem';
             );
     }
 
-    function RenderCourseItem({ courseItems, course }) {
-        if (courseItems != null) {
-            const rate = courseItems.map((courseItem) => {
-                return (
-                    <div key={courseItem._id} className="mb-5   " >
+    // function RenderCourseItem({ courseItems, course }) {
+    //     if (courseItems != null) {
+    //         const rate = courseItems.map((courseItem) => {
+    //             return (
+    //                 <div key={courseItem._id} className="mb-5   " >
                         
-                        <Player 
-                            playsInlines
-                            poster={baseUrl + course.image}
-                            src={baseUrl + courseItem.video}
-                            fluid={false}
-                            width={480}
-                            height={272}
+    //                     <Player 
+    //                         playsInlines
+    //                         poster={baseUrl + course.image}
+    //                         src={baseUrl + courseItem.video}
+    //                         fluid={false}
+    //                         width={480}
+    //                         height={272}
     
-                        />
-                    </div>
-                );
-            });
+    //                     />
+    //                 </div>
+    //             );
+    //         });
     
-            return (
-                <div>
-                    <Stagger in>
-                        <h4>Contents</h4>
-                        <Fade in>                  
-                            {rate}                  
-                        </Fade>
-                    </Stagger>
+    //         return (
+    //             <div>
+    //                 <Stagger in>
+    //                     <h4>Contents</h4>
+    //                     <Fade in>                  
+    //                         {rate}                  
+    //                     </Fade>
+    //                 </Stagger>
     
-                </div >
-            );
-        } else {
-            return (
-                <div>
-                    <div></div>
-                </div>
-            );
-        }
-    }
+    //             </div >
+    //         );
+    //     } else {
+    //         return (
+    //             <div>
+    //                 <div></div>
+    //             </div>
+    //         );
+    //     }
+    // }
 
     class CommentForm extends Component {
 
@@ -138,7 +138,7 @@ import CourseItem from './CourseItem';
             <div>
                 <Button outline onClick={this.toggleModal}><span className="fa fa-pencil fa-lg"></span> Submit Comment</Button>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+                <ModalHeader className="model-headercolor" toggle={this.toggleModal}>Submit Comment</ModalHeader>
                 <ModalBody>
                     <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                         <Row className="form-group">
